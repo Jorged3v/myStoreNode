@@ -23,7 +23,36 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({ id, name: 'Product 2', price: 2000 });
+  if( id === '999'){
+    res.status(404).json({
+      message: 'Producto no existe'
+    })
+  } else{
+    res.json({
+      id,
+      name: 'Product 2',
+      price: 2000
+    });
+  }
+
+});
+
+//Metodo POST
+
+router.post('/', (req, res) => {
+  const body = req.body;
+  res.status(201).json({
+    message: 'created',
+    data: body,
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  res.json({
+    message: 'Deleted',
+    id,
+  });
 });
 
 module.exports = router;
